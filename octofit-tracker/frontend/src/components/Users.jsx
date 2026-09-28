@@ -1,16 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const getApiBaseUrl = () => {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
+const apiBaseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
-  if (codespaceName) {
-    return `https://${codespaceName}-8000.app.github.dev`;
-  }
-
-  return 'http://localhost:8000';
-};
-
-const getUsersUrl = () => `${getApiBaseUrl()}/api/users/`;
+const usersUrl = `${apiBaseUrl}/api/users/`;
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -20,7 +15,7 @@ function Users() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(getUsersUrl());
+        const response = await fetch(usersUrl);
         if (!response.ok) {
           throw new Error('Failed to fetch users');
         }

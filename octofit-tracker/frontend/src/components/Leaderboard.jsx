@@ -1,16 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const getApiBaseUrl = () => {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
+const apiBaseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
-  if (codespaceName) {
-    return `https://${codespaceName}-8000.app.github.dev`;
-  }
-
-  return 'http://localhost:8000';
-};
-
-const getLeaderboardUrl = () => `${getApiBaseUrl()}/api/leaderboard/`;
+const leaderboardUrl = `${apiBaseUrl}/api/leaderboard/`;
 
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
@@ -20,7 +15,7 @@ function Leaderboard() {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch(getLeaderboardUrl());
+        const response = await fetch(leaderboardUrl);
         if (!response.ok) {
           throw new Error('Failed to fetch leaderboard');
         }

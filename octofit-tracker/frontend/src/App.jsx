@@ -1,4 +1,9 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
+import Users from './components/Users';
+import Teams from './components/Teams';
+import Activities from './components/Activities';
+import Leaderboard from './components/Leaderboard';
+import Workouts from './components/Workouts';
 
 function HomePage() {
   return (
@@ -25,45 +30,13 @@ function HomePage() {
             </p>
 
             <div className="d-flex flex-wrap gap-2 mt-4">
-              <span className="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-2">
-                User profiles
-              </span>
-              <span className="badge bg-success-subtle text-success-emphasis rounded-pill px-3 py-2">
-                Activity tracking
-              </span>
-              <span className="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-2">
-                Leaderboards
-              </span>
-              <span className="badge bg-info-subtle text-info-emphasis rounded-pill px-3 py-2">
-                Team management
-              </span>
+              <span className="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-2">User profiles</span>
+              <span className="badge bg-success-subtle text-success-emphasis rounded-pill px-3 py-2">Activity tracking</span>
+              <span className="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-2">Leaderboards</span>
+              <span className="badge bg-info-subtle text-info-emphasis rounded-pill px-3 py-2">Team management</span>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function LeaderboardPage() {
-  return (
-    <div className="container py-5">
-      <h2 className="mb-4">Leaderboard</h2>
-      <div className="list-group">
-        {[
-          ['Ava', 980],
-          ['Noah', 945],
-          ['Mila', 920],
-          ['Leo', 890],
-        ].map(([name, score], index) => (
-          <div key={name} className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <span className="badge bg-dark me-3">#{index + 1}</span>
-              {name}
-            </div>
-            <strong>{score} pts</strong>
-          </div>
-        ))}
       </div>
     </div>
   );
@@ -77,14 +50,22 @@ function App() {
           <span className="navbar-brand fw-bold">Octofit</span>
           <div className="navbar-nav ms-auto">
             <NavLink className="nav-link" to="/">Home</NavLink>
+            <NavLink className="nav-link" to="/users">Users</NavLink>
+            <NavLink className="nav-link" to="/teams">Teams</NavLink>
+            <NavLink className="nav-link" to="/activities">Activities</NavLink>
             <NavLink className="nav-link" to="/leaderboard">Leaderboard</NavLink>
+            <NavLink className="nav-link" to="/workouts">Workouts</NavLink>
           </div>
         </div>
       </nav>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/workouts" element={<Workouts />} />
       </Routes>
     </>
   );

@@ -12,10 +12,12 @@ dotenv.config();
 
 const app = express();
 const PORT = Number(process.env.PORT || 8000);
-const codespaceName = process.env.CODESPACE_NAME;
+const codespaceName = process.env.CODESPACE_NAME?.trim();
 const baseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
   : 'http://localhost:8000';
+
+console.log(`API base URL: ${baseUrl}`);
 
 app.use(cors());
 app.use(express.json());

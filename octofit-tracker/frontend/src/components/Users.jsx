@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
-const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000';
-
-const usersUrl = `${apiBaseUrl}/api/users/`;
+const usersUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/users/`
+  : 'http://localhost:8000/api/users/';
 
 function Users() {
   const [users, setUsers] = useState([]);
